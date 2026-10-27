@@ -1,0 +1,594 @@
+{
+ "app": "tshenolo",
+ "charts": [],
+ "content": "[{\"id\": \"d1326e01f7\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Buying</b></span>\", \"col\": 12}}, {\"id\": \"f97584c519\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"ASNs In Transit\", \"col\": 4}}, {\"id\": \"a79f6fbd1b\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Suppliers Pending Vetting\", \"col\": 4}}, {\"id\": \"5beedbdb9a\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Open Consignment Requests\", \"col\": 4}}, {\"id\": \"567462c161\", \"type\": \"card\", \"data\": {\"card_name\": \"Purchasing\", \"col\": 4}}, {\"id\": \"52e530ec66\", \"type\": \"card\", \"data\": {\"card_name\": \"Supplier Vetting\", \"col\": 4}}, {\"id\": \"0b21fafd46\", \"type\": \"card\", \"data\": {\"card_name\": \"Buying Reports\", \"col\": 4}}, {\"id\": \"6c5c935dfd\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Selling & Consignment</b></span>\", \"col\": 12}}, {\"id\": \"0ea6811bbe\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Active Consignment Notes\", \"col\": 4}}, {\"id\": \"6513433924\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Open Consignment Loans\", \"col\": 4}}, {\"id\": \"10f9b05e85\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Consignment Warehouses\", \"col\": 4}}, {\"id\": \"fea4b42f1a\", \"type\": \"card\", \"data\": {\"card_name\": \"Consignment\", \"col\": 4}}, {\"id\": \"adab5881ed\", \"type\": \"card\", \"data\": {\"card_name\": \"Sales\", \"col\": 4}}, {\"id\": \"35741e5f2a\", \"type\": \"card\", \"data\": {\"card_name\": \"Selling Reports\", \"col\": 4}}, {\"id\": \"d9d057c0b2\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Service</b></span>\", \"col\": 12}}, {\"id\": \"614b4298e8\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Equipment Due for Service\", \"col\": 4}}, {\"id\": \"2a1931d637\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Open Service Tickets\", \"col\": 4}}, {\"id\": \"06d592f532\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Active SLA Contracts\", \"col\": 4}}, {\"id\": \"7449f3836f\", \"type\": \"card\", \"data\": {\"card_name\": \"Service Desk\", \"col\": 4}}, {\"id\": \"9445b7dbe0\", \"type\": \"card\", \"data\": {\"card_name\": \"SLA Contracts\", \"col\": 4}}, {\"id\": \"b4f01199a0\", \"type\": \"card\", \"data\": {\"card_name\": \"Customer Equipment\", \"col\": 4}}, {\"id\": \"a80ae176ea\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Assets</b></span>\", \"col\": 12}}, {\"id\": \"e8f2dba17d\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Assets Due for Service\", \"col\": 4}}, {\"id\": \"7cb5c9c81f\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Asset Warranties Expiring\", \"col\": 4}}, {\"id\": \"b9220f1d32\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Assets Nearing End of Life\", \"col\": 4}}, {\"id\": \"8058052e34\", \"type\": \"card\", \"data\": {\"card_name\": \"Asset Register\", \"col\": 4}}, {\"id\": \"bdf0839030\", \"type\": \"card\", \"data\": {\"card_name\": \"Asset Maintenance\", \"col\": 4}}, {\"id\": \"340cd19c83\", \"type\": \"card\", \"data\": {\"card_name\": \"Asset Reports\", \"col\": 4}}, {\"id\": \"4d1ab0a0a9\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Setup</b></span>\", \"col\": 12}}, {\"id\": \"df88ef3bd1\", \"type\": \"card\", \"data\": {\"card_name\": \"Configuration\", \"col\": 4}}, {\"id\": \"6131d8b989\", \"type\": \"card\", \"data\": {\"card_name\": \"Masters\", \"col\": 4}}]",
+ "creation": "2026-10-27 12:00:00.000000",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "layout-grid",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Tshenolo",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchasing",
+   "link_count": 6,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Advance Shipping Notice",
+   "link_count": 0,
+   "link_to": "Advance Shipping Notice",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Material Request",
+   "link_count": 0,
+   "link_to": "Material Request",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Supplier Quotation",
+   "link_count": 0,
+   "link_to": "Supplier Quotation",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchase Order",
+   "link_count": 0,
+   "link_to": "Purchase Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchase Receipt",
+   "link_count": 0,
+   "link_to": "Purchase Receipt",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchase Invoice",
+   "link_count": 0,
+   "link_to": "Purchase Invoice",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Supplier Vetting",
+   "link_count": 2,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Supplier",
+   "link_count": 0,
+   "link_to": "Supplier",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Item",
+   "link_count": 0,
+   "link_to": "Item",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Buying Reports",
+   "link_count": 1,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Purchase Back Order",
+   "link_count": 0,
+   "link_to": "Purchase Back Order",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Consignment",
+   "link_count": 4,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Consignment Note",
+   "link_count": 0,
+   "link_to": "Consignment Note",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Consignment Utilisation",
+   "link_count": 0,
+   "link_to": "Consignment Utilisation",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Consignment Return",
+   "link_count": 0,
+   "link_to": "Consignment Return",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Consignment Loan",
+   "link_count": 0,
+   "link_to": "Consignment Loan",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sales",
+   "link_count": 3,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sales Order",
+   "link_count": 0,
+   "link_to": "Sales Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Delivery Note",
+   "link_count": 0,
+   "link_to": "Delivery Note",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sales Invoice",
+   "link_count": 0,
+   "link_to": "Sales Invoice",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Selling Reports",
+   "link_count": 3,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Consignment Stock Balance",
+   "link_count": 0,
+   "link_to": "Consignment Stock Balance",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Consignment Loan Register",
+   "link_count": 0,
+   "link_to": "Consignment Loan Register",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Sales Back Order",
+   "link_count": 0,
+   "link_to": "Sales Back Order",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Service Desk",
+   "link_count": 3,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Issue",
+   "link_count": 0,
+   "link_to": "Issue",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Maintenance Visit",
+   "link_count": 0,
+   "link_to": "Maintenance Visit",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Maintenance Schedule",
+   "link_count": 0,
+   "link_to": "Maintenance Schedule",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "SLA Contracts",
+   "link_count": 3,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Contract",
+   "link_count": 0,
+   "link_to": "Contract",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sales Order",
+   "link_count": 0,
+   "link_to": "Sales Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sales Invoice",
+   "link_count": 0,
+   "link_to": "Sales Invoice",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Customer Equipment",
+   "link_count": 3,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Serial No",
+   "link_count": 0,
+   "link_to": "Serial No",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Warranty Claim",
+   "link_count": 0,
+   "link_to": "Warranty Claim",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Service Level Agreement",
+   "link_count": 0,
+   "link_to": "Service Level Agreement",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Asset Register",
+   "link_count": 2,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Asset",
+   "link_count": 0,
+   "link_to": "Asset",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Asset Category",
+   "link_count": 0,
+   "link_to": "Asset Category",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Asset Maintenance",
+   "link_count": 4,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Asset Maintenance",
+   "link_count": 0,
+   "link_to": "Asset Maintenance",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Asset Maintenance Log",
+   "link_count": 0,
+   "link_to": "Asset Maintenance Log",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Asset Repair",
+   "link_count": 0,
+   "link_to": "Asset Repair",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Asset Maintenance Team",
+   "link_count": 0,
+   "link_to": "Asset Maintenance Team",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Asset Reports",
+   "link_count": 1,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Fixed Asset Register",
+   "link_count": 0,
+   "link_to": "Fixed Asset Register",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Configuration",
+   "link_count": 2,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Tshenolo Settings",
+   "link_count": 0,
+   "link_to": "Tshenolo Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Legacy Account Mapping",
+   "link_count": 0,
+   "link_to": "Legacy Account Mapping",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Masters",
+   "link_count": 3,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Item",
+   "link_count": 0,
+   "link_to": "Item",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Warehouse",
+   "link_count": 0,
+   "link_to": "Warehouse",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Batch",
+   "link_count": 0,
+   "link_to": "Batch",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-10-27 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Tshenolo",
+ "name": "Tshenolo",
+ "number_cards": [
+  {
+   "label": "ASNs In Transit",
+   "number_card_name": "ASNs In Transit"
+  },
+  {
+   "label": "Suppliers Pending Vetting",
+   "number_card_name": "Suppliers Pending Vetting"
+  },
+  {
+   "label": "Open Consignment Requests",
+   "number_card_name": "Open Consignment Requests"
+  },
+  {
+   "label": "Active Consignment Notes",
+   "number_card_name": "Active Consignment Notes"
+  },
+  {
+   "label": "Open Consignment Loans",
+   "number_card_name": "Open Consignment Loans"
+  },
+  {
+   "label": "Consignment Warehouses",
+   "number_card_name": "Consignment Warehouses"
+  },
+  {
+   "label": "Equipment Due for Service",
+   "number_card_name": "Equipment Due for Service"
+  },
+  {
+   "label": "Open Service Tickets",
+   "number_card_name": "Open Service Tickets"
+  },
+  {
+   "label": "Active SLA Contracts",
+   "number_card_name": "Active SLA Contracts"
+  },
+  {
+   "label": "Assets Due for Service",
+   "number_card_name": "Assets Due for Service"
+  },
+  {
+   "label": "Asset Warranties Expiring",
+   "number_card_name": "Asset Warranties Expiring"
+  },
+  {
+   "label": "Assets Nearing End of Life",
+   "number_card_name": "Assets Nearing End of Life"
+  }
+ ],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "restrict_to_domain": "",
+ "roles": [],
+ "sequence_id": 50.0,
+ "shortcuts": [],
+ "standard": 1,
+ "title": "Tshenolo",
+ "type": "Workspace"
+}

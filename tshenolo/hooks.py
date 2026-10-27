@@ -8,7 +8,140 @@ app_license = "mit"
 # Apps
 # ------------------
 
-# required_apps = []
+required_apps = ["erpnext"]
+
+# The module-wise developments are navigated from the single Tshenolo workspace, which groups
+# them by module, so these modules do not get a sidebar of their own.
+code_only_modules = {
+	"Tshenolo Buying": ["Tshenolo"],
+	"Tshenolo Selling": ["Tshenolo"],
+	"Tshenolo Service": ["Tshenolo"],
+	"Tshenolo Assets": ["Tshenolo"],
+}
+
+after_install = "tshenolo.setup.install.after_install"
+after_migrate = "tshenolo.setup.install.after_migrate"
+
+fixtures = [
+	{"dt": "Custom Field", "filters": [["module", "like", "Tshenolo%"]]},
+	{"dt": "Property Setter", "filters": [["module", "like", "Tshenolo%"]]},
+]
+
+app_include_js = "/assets/tshenolo/js/consignment.js"
+
+doctype_js = {
+	"Purchase Order": "public/js/purchase_order.js",
+	"Material Request": "public/js/material_request.js",
+	"Issue": "public/js/issue.js",
+	"Sales Order": "public/js/sales_order.js",
+	"Sales Invoice": "public/js/sales_invoice.js",
+}
+
+doc_events = {
+	"Supplier": {
+		"before_insert": "tshenolo.events.buying.set_supplier_code",
+		"validate": "tshenolo.events.buying.validate_supplier_vetting",
+	},
+	"Item": {
+		"validate": "tshenolo.events.buying.set_item_classification",
+	},
+	"Material Request": {
+		"validate": "tshenolo.events.buying.validate_consignment_request",
+	},
+	"Supplier Quotation": {
+		"validate": "tshenolo.events.buying.validate_supplier_is_vetted",
+	},
+	"Purchase Order": {
+		"before_validate": "tshenolo.events.buying.apply_sample_pricing",
+		"validate": [
+			"tshenolo.events.buying.validate_supplier_is_vetted",
+			"tshenolo.events.buying.set_follow_up_po_items",
+		],
+		"before_update_after_submit": "tshenolo.events.buying.set_follow_up_po_items",
+	},
+	"Purchase Receipt": {
+		"before_validate": "tshenolo.events.buying.apply_sample_pricing",
+		"on_submit": [
+			"tshenolo.events.buying.update_asn_received_qty",
+			"tshenolo.events.selling.copy_supplier_lot_to_batch",
+		],
+		"on_cancel": "tshenolo.events.buying.update_asn_received_qty",
+	},
+	"Purchase Invoice": {
+		"validate": "tshenolo.events.buying.validate_supplier_is_vetted",
+	},
+	"Sales Order": {
+		"validate": [
+			"tshenolo.events.selling.set_back_order_status",
+			"tshenolo.events.service.validate_service_order",
+		],
+	},
+	"Delivery Note": {
+		"validate": "tshenolo.events.selling.set_supplier_lot_no",
+		"on_submit": [
+			"tshenolo.events.selling.set_supplier_lot_no",
+			"tshenolo.events.selling.update_sales_order_back_orders",
+		],
+		"on_cancel": "tshenolo.events.selling.update_sales_order_back_orders",
+	},
+	"Sales Invoice": {
+		"validate": [
+			"tshenolo.events.selling.set_supplier_lot_no",
+			"tshenolo.events.selling.validate_consignment_utilisation",
+			"tshenolo.events.service.validate_contract",
+		],
+		"before_submit": "tshenolo.events.service.validate_contract_balance",
+		"on_submit": [
+			"tshenolo.events.selling.set_supplier_lot_no",
+			"tshenolo.events.selling.update_sales_order_back_orders",
+			"tshenolo.events.selling.link_consignment_utilisation",
+			"tshenolo.events.service.update_contract_value",
+		],
+		"on_cancel": [
+			"tshenolo.events.selling.update_sales_order_back_orders",
+			"tshenolo.events.selling.link_consignment_utilisation",
+			"tshenolo.events.service.update_contract_value",
+		],
+	},
+	"Contract": {
+		"validate": "tshenolo.events.service.set_contract_balance",
+	},
+	"Issue": {
+		"validate": "tshenolo.events.service.validate_issue",
+	},
+	"Serial No": {
+		"validate": "tshenolo.events.service.set_next_service_date",
+	},
+	"Maintenance Visit": {
+		"on_submit": "tshenolo.events.service.update_equipment_service_dates",
+		"on_cancel": "tshenolo.events.service.update_equipment_service_dates",
+	},
+	"Asset": {
+		"validate": "tshenolo.events.assets.set_asset_dates",
+		"before_update_after_submit": "tshenolo.events.assets.set_asset_dates",
+	},
+	"Asset Maintenance Log": {
+		"on_submit": "tshenolo.events.assets.update_asset_service_date",
+		"on_cancel": "tshenolo.events.assets.update_asset_service_date",
+	},
+}
+
+scheduler_events = {
+	"daily": [
+		"tshenolo.tasks.create_supplier_follow_up_todos",
+		"tshenolo.tasks.notify_service_due",
+		"tshenolo.tasks.notify_asset_end_of_life",
+		"tshenolo.tasks.notify_contract_status",
+	],
+}
+
+override_doctype_dashboards = {
+	"Purchase Order": "tshenolo.events.dashboards.purchase_order",
+	"Material Request": "tshenolo.events.dashboards.material_request",
+	"Customer": "tshenolo.events.dashboards.customer",
+	"Issue": "tshenolo.events.dashboards.issue",
+	"Contract": "tshenolo.events.dashboards.contract",
+}
 
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [

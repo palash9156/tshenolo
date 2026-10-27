@@ -1,0 +1,183 @@
+{
+ "actions": [],
+ "creation": "2026-10-15 09:30:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "buying_section",
+  "enforce_supplier_vetting",
+  "supplier_code_series",
+  "column_break_buying",
+  "buyer_alert_role",
+  "consignment_section",
+  "consignment_parent_warehouse",
+  "service_section",
+  "default_service_item",
+  "service_notification_months",
+  "column_break_service",
+  "service_alert_role",
+  "contract_section",
+  "block_contract_overrun",
+  "contract_low_balance_percent",
+  "column_break_contract",
+  "contract_expiry_notification_days",
+  "contract_alert_role",
+  "asset_section",
+  "asset_eol_notification_months",
+  "column_break_asset",
+  "asset_alert_role"
+ ],
+ "fields": [
+  {
+   "fieldname": "buying_section",
+   "fieldtype": "Section Break",
+   "label": "Buying"
+  },
+  {
+   "fieldname": "enforce_supplier_vetting",
+   "fieldtype": "Check",
+   "label": "Block Transactions for Unvetted Suppliers",
+   "default": "1",
+   "description": "Supplier Quotations, Purchase Orders and Purchase Invoices require the supplier's Vetting Status to be Approved."
+  },
+  {
+   "fieldname": "supplier_code_series",
+   "fieldtype": "Data",
+   "label": "Supplier Code Series",
+   "default": "SUP-.#####",
+   "description": "Naming series used to generate the Supplier Code, e.g. SUP-.#####"
+  },
+  {
+   "fieldname": "column_break_buying",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "buyer_alert_role",
+   "fieldtype": "Link",
+   "label": "Supplier Follow-up Fallback Role",
+   "options": "Role",
+   "default": "Purchase Manager",
+   "description": "Receives follow-up ToDos when no buyer is set on the follow-up row."
+  },
+  {
+   "fieldname": "consignment_section",
+   "fieldtype": "Section Break",
+   "label": "Consignment"
+  },
+  {
+   "fieldname": "consignment_parent_warehouse",
+   "fieldtype": "Link",
+   "label": "Consignment Parent Warehouse",
+   "options": "Warehouse",
+   "description": "Group warehouse under which per-hospital consignment and loan warehouses are created. Defaults to a 'Consignment Warehouses' group under the company's root warehouse."
+  },
+  {
+   "fieldname": "service_section",
+   "fieldtype": "Section Break",
+   "label": "Customer Service"
+  },
+  {
+   "fieldname": "default_service_item",
+   "fieldtype": "Link",
+   "label": "Default Service Item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "service_notification_months",
+   "fieldtype": "Int",
+   "label": "Service Due Notification (Months)",
+   "default": "3"
+  },
+  {
+   "fieldname": "column_break_service",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "service_alert_role",
+   "fieldtype": "Link",
+   "label": "Service Alert Role",
+   "options": "Role",
+   "default": "Maintenance Manager"
+  },
+  {
+   "fieldname": "contract_section",
+   "fieldtype": "Section Break",
+   "label": "SLA Contracts"
+  },
+  {
+   "fieldname": "block_contract_overrun",
+   "fieldtype": "Check",
+   "label": "Block Invoices Exceeding Contract Balance",
+   "default": "1"
+  },
+  {
+   "fieldname": "contract_low_balance_percent",
+   "fieldtype": "Percent",
+   "label": "Low Balance Alert (%)",
+   "default": "10"
+  },
+  {
+   "fieldname": "column_break_contract",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "contract_expiry_notification_days",
+   "fieldtype": "Int",
+   "label": "Contract Expiry Notification (Days)",
+   "default": "30"
+  },
+  {
+   "fieldname": "contract_alert_role",
+   "fieldtype": "Link",
+   "label": "Contract Alert Role",
+   "options": "Role",
+   "default": "Accounts Manager"
+  },
+  {
+   "fieldname": "asset_section",
+   "fieldtype": "Section Break",
+   "label": "Assets"
+  },
+  {
+   "fieldname": "asset_eol_notification_months",
+   "fieldtype": "Int",
+   "label": "Asset End of Life Notification (Months)",
+   "default": "6"
+  },
+  {
+   "fieldname": "column_break_asset",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "asset_alert_role",
+   "fieldtype": "Link",
+   "label": "Asset Alert Role",
+   "options": "Role",
+   "default": "Accounts Manager"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-10-15 09:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Tshenolo",
+ "name": "Tshenolo Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
