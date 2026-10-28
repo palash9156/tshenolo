@@ -1,0 +1,79 @@
+{%- from "tshenolo/templates/print/tshenolo_macros.html" import qty -%}
+{%- set company = tshenolo_company(doc.company) -%}
+{%- set ts_title = _("GOODS RECEIVED NOTE") -%}
+{%- set ts_meta = [
+	(_("GRN Reference"), doc.name),
+	(_("Purchase Order"), tshenolo_po_numbers(doc)),
+	(_("Delivery Note Ref"), doc.supplier_delivery_note),
+	(_("Date & Time Logged"), frappe.utils.format_date(doc.posting_date, "dd/MM/yyyy") ~ " " ~ _("at") ~ " " ~ frappe.utils.format_time(doc.posting_time, "HH:mm") ~ " SAST"),
+] -%}
+<div class="ts-doc">
+	{% include "tshenolo/templates/print/tshenolo_header.html" %}
+
+	<div class="ts-blocks">
+		<div class="ts-block">
+			<div class="ts-block-title">{{ _("Supplier") }}</div>
+			<table class="ts-fields">
+				<tr><th>{{ _("Company Name") }}</th><td>{{ doc.supplier_name }}</td></tr>
+				<tr><th>{{ _("Contact Person") }}</th><td>{{ doc.contact_display or "" }}</td></tr>
+				<tr><th>{{ _("Email") }}</th><td>{{ doc.contact_email or "" }}</td></tr>
+			</table>
+		</div>
+		<div class="ts-block">
+			<div class="ts-block-title">{{ _("Received At") }}</div>
+			<table class="ts-fields">
+				<tr><th>{{ _("Warehouse") }}</th><td>{{ doc.set_warehouse or "" }}</td></tr>
+				<tr><th>{{ _("Physical Address") }}</th><td>{{ doc.shipping_address_display or company.address_display or "" }}</td></tr>
+			</table>
+		</div>
+	</div>
+
+	<div class="ts-section-title">{{ _("Delivery Breakdown & Inventory Discrepancy Assessment") }}</div>
+	<table class="ts-items">
+		<thead>
+			<tr>
+				<th>{{ _("Item Code / NAPPI") }}</th>
+				<th>{{ _("Product Description") }}</th>
+				<th class="num">{{ _("Qty Ordered") }}</th>
+				<th class="num">{{ _("Qty Received") }}</th>
+				<th class="num">{{ _("Qty Accepted") }}</th>
+				<th class="num">{{ _("Qty Rejected") }}</th>
+				<th>{{ _("Status / Notes") }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{%- for row in tshenolo_grn_rows(doc) %}
+			<tr{% if row.rejected_qty %} class="ts-negative"{% endif %}>
+				<td>{{ row.item_code }}{% if row.nappi_code %}<br><span class="ts-muted">{{ row.nappi_code }}</span>{% endif %}</td>
+				<td>{{ row.item_name }}</td>
+				<td class="num">{{ qty(row.ordered_qty) if row.ordered_qty is not none else "–" }}</td>
+				<td class="num">{{ qty(row.received_qty) }}</td>
+				<td class="num">{{ qty(row.accepted_qty) }}</td>
+				<td class="num">{{ qty(row.rejected_qty) }}</td>
+				<td>{{ row.status }}</td>
+			</tr>
+			{%- endfor %}
+		</tbody>
+	</table>
+
+	<div class="ts-section-title">{{ _("Next Action Steps & Invoicing Conditions") }}</div>
+	<div class="ts-terms">
+		<ol>
+			<li><strong>{{ _("Invoice Generation") }}:</strong> {{ _("Please issue your final Invoice matching the 'Qty Accepted' figures above. Ensure your Invoice explicitly displays our Purchase Order number.") }}</li>
+			<li><strong>{{ _("Discrepancy Resolution") }}:</strong> {{ _("For items marked as rejected or missing, our procurement team will contact your logistics coordinator to arrange credit notes, collection or replacement deliveries.") }}</li>
+			<li><strong>{{ _("Payment Release Protocol") }}:</strong> {{ _("Our finance department cannot clear payments without a matching Three-Way Match (Purchase Order + GRN + Invoice).") }}</li>
+		</ol>
+	</div>
+
+	<div class="ts-signatures">
+		<div>
+			<div class="ts-muted">{{ _("Received & Verified By") }}:</div>
+			<div class="ts-sign-line">
+				<strong>{{ frappe.get_fullname(doc.owner) }}</strong><br>
+				{{ _("Receiving Officer") }}<br>
+				{{ doc.company }}
+			</div>
+		</div>
+		<div></div>
+	</div>
+</div>

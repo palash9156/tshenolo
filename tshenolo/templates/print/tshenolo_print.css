@@ -1,0 +1,33 @@
+.ts-doc { font-size: 11px; color: #1f2933; line-height: 1.45; }
+.ts-doc table { width: 100%; border-collapse: collapse; }
+.ts-header { display: table; width: 100%; border-bottom: 3px solid #0b4f6c; padding-bottom: 10px; margin-bottom: 14px; }
+.ts-header > div { display: table-cell; vertical-align: top; }
+.ts-company { font-size: 18px; font-weight: 700; color: #0b4f6c; letter-spacing: 0.5px; }
+.ts-address { color: #52606d; margin-top: 4px; }
+.ts-title { text-align: right; width: 45%; }
+.ts-title h1 { font-size: 20px; font-weight: 700; margin: 0 0 6px; color: #0b4f6c; }
+.ts-meta th, .ts-meta td { padding: 1px 0 1px 10px; text-align: right; }
+.ts-meta th { color: #52606d; font-weight: 600; white-space: nowrap; }
+.ts-blocks { display: table; width: 100%; table-layout: fixed; border-spacing: 10px 0; margin: 0 -10px 14px; }
+.ts-block { display: table-cell; border: 1px solid #cbd2d9; border-radius: 4px; padding: 8px 10px; vertical-align: top; }
+.ts-block-title { font-weight: 700; color: #0b4f6c; text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px; margin-bottom: 4px; }
+.ts-fields th { width: 38%; text-align: left; color: #52606d; font-weight: 600; padding: 1px 6px 1px 0; vertical-align: top; }
+.ts-fields td { padding: 1px 0; vertical-align: top; }
+.ts-items { margin-bottom: 12px; }
+.ts-items th { background: #0b4f6c; color: #fff; font-size: 10px; text-transform: uppercase; padding: 6px; text-align: left; }
+.ts-items td { border-bottom: 1px solid #e4e7eb; padding: 6px; vertical-align: top; }
+.ts-items .num { text-align: right; white-space: nowrap; }
+.ts-items tr.ts-negative td { color: #a61b1b; }
+.ts-items tfoot td { font-weight: 700; border-top: 2px solid #0b4f6c; border-bottom: none; }
+.ts-totals { width: 45% !important; margin-left: auto; margin-bottom: 14px; }
+.ts-totals td { padding: 3px 6px; }
+.ts-totals td.num { text-align: right; white-space: nowrap; }
+.ts-totals tr.ts-grand td { font-weight: 700; font-size: 12px; border-top: 2px solid #0b4f6c; }
+.ts-section-title { font-weight: 700; color: #0b4f6c; text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px; margin: 14px 0 4px; }
+.ts-terms { font-size: 10px; color: #3e4c59; }
+.ts-terms ol { padding-left: 16px; margin: 0; }
+.ts-note { border-left: 3px solid #0b4f6c; background: #f0f4f8; padding: 6px 10px; margin: 10px 0; }
+.ts-signatures { display: table; width: 100%; table-layout: fixed; margin-top: 30px; }
+.ts-signatures > div { display: table-cell; padding-right: 30px; vertical-align: bottom; }
+.ts-sign-line { border-top: 1px solid #1f2933; margin-top: 34px; padding-top: 4px; }
+.ts-muted { color: #52606d; }

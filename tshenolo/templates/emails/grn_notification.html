@@ -1,0 +1,73 @@
+{#- Body of the GRN email. Shared by the "Tshenolo GRN Receipt" Notification and Email Template; uses only `doc`. -#}
+{%- from "tshenolo/templates/print/tshenolo_macros.html" import qty -%}
+{%- set settings = tshenolo_settings() -%}
+{%- set company = tshenolo_company(doc.company) -%}
+{#- Whole style attributes, so the cell styles stay inline for email clients and are defined once. -#}
+{%- set th = 'style="background:#0b4f6c;color:#ffffff;padding:6px 8px;text-align:left;font-size:12px;"' -%}
+{%- set th_num = 'style="background:#0b4f6c;color:#ffffff;padding:6px 8px;text-align:right;font-size:12px;"' -%}
+{%- set td = 'style="border-bottom:1px solid #e4e7eb;padding:6px 8px;font-size:13px;vertical-align:top;"' -%}
+{%- set td_num = 'style="border-bottom:1px solid #e4e7eb;padding:6px 8px;font-size:13px;vertical-align:top;text-align:right;"' -%}
+{%- set td_rejected = 'style="border-bottom:1px solid #e4e7eb;padding:6px 8px;font-size:13px;vertical-align:top;color:#a61b1b;"' -%}
+<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#1f2933;line-height:1.5;">
+	<p>{{ _("Dear {0},").format(doc.contact_display or doc.supplier_name) }}</p>
+
+	<p>{{ _("We are pleased to inform you that the medical devices and related consignments delivered to our warehouse facility have been successfully received, verified, and logged into our inventory management system.") }}</p>
+
+	<p>{{ _("A formal Goods Received Note (GRN) has been generated against your original Purchase Order and is attached to this email. Please see the processing summary below:") }}</p>
+
+	<table style="border-collapse:collapse;margin:8px 0 16px;">
+		<tr><td style="padding:2px 16px 2px 0;font-weight:bold;">{{ _("GRN Reference Number") }}:</td><td>{{ doc.name }}</td></tr>
+		{%- if tshenolo_po_numbers(doc) %}
+		<tr><td style="padding:2px 16px 2px 0;font-weight:bold;">{{ _("Associated Purchase Order") }}:</td><td>{{ tshenolo_po_numbers(doc) }}</td></tr>
+		{%- endif %}
+		{%- if doc.supplier_delivery_note %}
+		<tr><td style="padding:2px 16px 2px 0;font-weight:bold;">{{ _("Delivery Note Ref") }}:</td><td>{{ doc.supplier_delivery_note }}</td></tr>
+		{%- endif %}
+		<tr><td style="padding:2px 16px 2px 0;font-weight:bold;">{{ _("Date & Time Logged") }}:</td><td>{{ frappe.utils.format_date(doc.posting_date, "dd/MM/yyyy") }} {{ _("at") }} {{ frappe.utils.format_time(doc.posting_time, "HH:mm") }} SAST</td></tr>
+	</table>
+
+	<p style="font-weight:bold;margin-bottom:4px;">{{ _("Delivery Breakdown & Inventory Discrepancy Assessment") }}:</p>
+	<table style="border-collapse:collapse;width:100%;margin-bottom:16px;">
+		<tr>
+			<th {{ th }}>{{ _("Item Code / NAPPI") }}</th>
+			<th {{ th }}>{{ _("Product Description") }}</th>
+			<th {{ th_num }}>{{ _("Qty Ordered") }}</th>
+			<th {{ th_num }}>{{ _("Qty Received") }}</th>
+			<th {{ th_num }}>{{ _("Qty Rejected") }}</th>
+			<th {{ th }}>{{ _("Status / Notes") }}</th>
+		</tr>
+		{%- for row in tshenolo_grn_rows(doc) %}
+		<tr>
+			<td {{ td }}>{{ row.item_code }}{% if row.nappi_code %}<br><span style="color:#52606d;">{{ row.nappi_code }}</span>{% endif %}</td>
+			<td {{ td }}>{{ row.item_name }}</td>
+			<td {{ td_num }}>{{ qty(row.ordered_qty) if row.ordered_qty is not none else "–" }}</td>
+			<td {{ td_num }}>{{ qty(row.received_qty) }}</td>
+			<td {{ td_num }}>{{ qty(row.rejected_qty) }}</td>
+			<td {{ td_rejected if row.rejected_qty else td }}>{{ row.status }}</td>
+		</tr>
+		{%- endfor %}
+	</table>
+
+	<p style="font-weight:bold;margin-bottom:4px;">{{ _("Next Action Steps & Invoicing Conditions") }}:</p>
+	<ol style="margin-top:0;">
+		<li><strong>{{ _("Invoice Generation") }}:</strong> {{ _("Please issue your final Invoice matching the accepted quantities verified above (Qty Received less Qty Rejected). Ensure your Invoice explicitly displays our Purchase Order number.") }}</li>
+		<li><strong>{{ _("Discrepancy Resolution") }}:</strong> {{ _("For items marked as rejected or missing, our procurement team will contact your logistics coordinator to arrange credit notes, collection, or replacement deliveries.") }}</li>
+		<li><strong>{{ _("Payment Release Protocol") }}:</strong> {{ _("In accordance with standard compliance guidelines, our finance department cannot clear payments without a matching Three-Way Match (Purchase Order + GRN + Invoice).") }}</li>
+	</ol>
+
+	<p>{{ _("For any urgent queries regarding this verification, please contact our Warehouse Receiving desk directly by replying to this email.") }}</p>
+	<p>{{ _("Thank you for your continued commitment to providing critical medical supplies.") }}</p>
+
+	<p>
+		{{ _("Kind regards,") }}<br>
+		<strong>{{ frappe.get_fullname(doc.owner) }}</strong><br>
+		{{ _("Receiving Officer") }}<br>
+		{{ doc.company }}<br>
+		{%- if company.address_display %}
+		<span style="color:#52606d;">{{ _("Warehouse / Logistics Hub") }}: {{ company.address_display | replace("<br>", ", ") | striptags }}</span><br>
+		{%- endif %}
+		{%- if settings.warehouse_email or company.phone_no %}
+		<span style="color:#52606d;">{{ [settings.warehouse_email, company.phone_no] | select | join(" | ") }}</span>
+		{%- endif %}
+	</p>
+</div>

@@ -1,0 +1,96 @@
+{%- from "tshenolo/templates/print/tshenolo_macros.html" import money, qty -%}
+{%- set settings = tshenolo_settings() -%}
+{%- set company = tshenolo_company(doc.company) -%}
+{%- set ts_title = _("PURCHASE ORDER") -%}
+{%- set ts_meta = [
+	(_("PO Number"), doc.name),
+	(_("Date"), frappe.utils.format_date(doc.transaction_date, "dd MMMM yyyy")),
+	(_("Required By"), frappe.utils.format_date(doc.schedule_date, "dd MMMM yyyy")),
+] -%}
+<div class="ts-doc">
+	{% include "tshenolo/templates/print/tshenolo_header.html" %}
+
+	<div class="ts-blocks">
+		<div class="ts-block">
+			<div class="ts-block-title">{{ _("Supplier / Vendor") }}</div>
+			<table class="ts-fields">
+				<tr><th>{{ _("Company Name") }}</th><td>{{ doc.supplier_name }}</td></tr>
+				<tr><th>{{ _("Contact Person") }}</th><td>{{ doc.contact_display or "" }}</td></tr>
+				<tr><th>{{ _("Email / Tel") }}</th><td>{{ [doc.contact_email, doc.contact_mobile] | select | join(" / ") }}</td></tr>
+			</table>
+		</div>
+		<div class="ts-block">
+			<div class="ts-block-title">{{ _("Delivery & Shipping To") }}</div>
+			<table class="ts-fields">
+				<tr><th>{{ _("Delivery Site") }}</th><td>{{ doc.company }}{% if doc.set_warehouse %} – {{ doc.set_warehouse }}{% endif %}</td></tr>
+				<tr><th>{{ _("Physical Address") }}</th><td>{{ doc.shipping_address_display or company.address_display or "" }}</td></tr>
+				<tr><th>{{ _("Inbound Contact") }}</th><td>{{ settings.warehouse_email or "" }}</td></tr>
+				<tr><th>{{ _("Email Notifications") }}</th><td>{{ settings.accounts_email or "" }}</td></tr>
+			</table>
+		</div>
+	</div>
+
+	<table class="ts-items">
+		<thead>
+			<tr>
+				<th>{{ _("SKU / Code") }}</th>
+				<th>{{ _("Item / Device Description") }}</th>
+				<th>{{ _("NAPPI Code") }}</th>
+				<th class="num">{{ _("Qty") }}</th>
+				<th class="num">{{ _("Unit (ex VAT)") }}</th>
+				<th class="num">{{ _("Total (ex VAT)") }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{%- for row in doc.items %}
+			<tr>
+				<td>{{ row.item_code }}</td>
+				<td>{{ row.item_name }}</td>
+				<td>{{ row.nappi_code or "" }}</td>
+				<td class="num">{{ qty(row.qty) }} {{ row.uom }}</td>
+				<td class="num">{{ money(row.rate, doc.currency) }}</td>
+				<td class="num">{{ money(row.amount, doc.currency) }}</td>
+			</tr>
+			{%- endfor %}
+		</tbody>
+	</table>
+
+	<table class="ts-totals">
+		<tr><td>{{ _("Subtotal (Excl. VAT)") }}:</td><td class="num">{{ money(doc.total, doc.currency) }}</td></tr>
+		{%- if doc.discount_amount %}
+		<tr><td>{{ _("Discount") }}:</td><td class="num">{{ money(-doc.discount_amount, doc.currency) }}</td></tr>
+		{%- endif %}
+		{%- for tax in doc.taxes if tax.tax_amount_after_discount_amount %}
+		<tr><td>{{ tax.description }}:</td><td class="num">{{ money(tax.tax_amount_after_discount_amount, doc.currency) }}</td></tr>
+		{%- endfor %}
+		<tr class="ts-grand"><td>{{ _("Grand Total (Incl. VAT)") }}:</td><td class="num">{{ money(doc.grand_total, doc.currency) }}</td></tr>
+	</table>
+
+	{%- if settings.procurement_terms %}
+	<div class="ts-section-title">{{ _("Standard Procurement Terms & Compliance Conditions") }}</div>
+	<div class="ts-terms">{{ settings.procurement_terms }}</div>
+	{%- endif %}
+	{%- if doc.terms %}
+	<div class="ts-section-title">{{ _("Additional Terms") }}</div>
+	<div class="ts-terms">{{ doc.terms }}</div>
+	{%- endif %}
+
+	<div class="ts-signatures">
+		<div>
+			<div class="ts-muted">{{ _("Prepared & Requested By") }}:</div>
+			<div class="ts-sign-line">
+				<strong>{{ frappe.get_fullname(doc.owner) }}</strong><br>
+				{{ _("Procurement / Logistics Administrator") }}<br>
+				{{ doc.company }}
+			</div>
+		</div>
+		<div>
+			<div class="ts-muted">{{ _("Authorized & Approved By") }}:</div>
+			<div class="ts-sign-line">
+				<strong>{{ settings.po_approver_name or "" }}</strong><br>
+				{{ settings.po_approver_designation or "" }}<br>
+				{{ doc.company }}
+			</div>
+		</div>
+	</div>
+</div>

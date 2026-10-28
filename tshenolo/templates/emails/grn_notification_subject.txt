@@ -1,0 +1,6 @@
+{%- set po_numbers = tshenolo_po_numbers(doc) -%}
+{%- if po_numbers -%}
+{{ _("Goods Received Note (GRN) Confirmation: {0} – PO #{1}").format(doc.company, po_numbers) }}
+{%- else -%}
+{{ _("Goods Received Note (GRN) Confirmation: {0} – {1}").format(doc.company, doc.name) }}
+{%- endif -%}

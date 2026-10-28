@@ -1,0 +1,25 @@
+{#- Expects `company` (from `tshenolo_company`), `ts_title` and `ts_meta` (a list of (label, value) pairs)
+to be set by the including print format. -#}
+<style>{% include "tshenolo/templates/print/tshenolo_print.css" %}</style>
+<div class="ts-header">
+	<div>
+		<div class="ts-company">{{ (company.company_name or doc.company) | upper }}</div>
+		<div class="ts-address">{{ company.address_display or "" }}</div>
+	</div>
+	<div class="ts-title">
+		<h1>{{ ts_title }}</h1>
+		<table class="ts-meta">
+			{%- for label, value in ts_meta %}
+			{%- if value %}
+			<tr><th>{{ label }}:</th><td>{{ value }}</td></tr>
+			{%- endif %}
+			{%- endfor %}
+			{%- if company.sahpra_license_no %}
+			<tr><th>{{ _("SAHPRA License") }}:</th><td>{{ company.sahpra_license_no }}</td></tr>
+			{%- endif %}
+			{%- if company.tax_id %}
+			<tr><th>{{ _("VAT No") }}:</th><td>{{ company.tax_id }}</td></tr>
+			{%- endif %}
+		</table>
+	</div>
+</div>

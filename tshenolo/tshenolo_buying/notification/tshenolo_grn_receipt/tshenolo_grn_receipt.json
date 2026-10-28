@@ -1,0 +1,33 @@
+{
+ "attach_print": 1,
+ "channel": "Email",
+ "condition": "not doc.is_return",
+ "condition_type": "Python",
+ "creation": "2026-10-28 10:00:00.000000",
+ "days_in_advance": 0,
+ "docstatus": 0,
+ "doctype": "Notification",
+ "document_type": "Purchase Receipt",
+ "enabled": 1,
+ "event": "Submit",
+ "idx": 0,
+ "is_standard": 1,
+ "message": "{% include \"tshenolo/templates/emails/grn_notification.html\" %}\n",
+ "message_type": "HTML",
+ "minutes_offset": 0,
+ "modified": "2026-10-28 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Tshenolo Buying",
+ "name": "Tshenolo GRN Receipt",
+ "owner": "Administrator",
+ "print_format": "Tshenolo GRN",
+ "recipients": [
+  {
+   "receiver_by_document_field": "contact_email",
+   "cc": "{{ tshenolo_settings().warehouse_email or \"\" }}\n{{ tshenolo_settings().accounts_email or \"\" }}"
+  }
+ ],
+ "send_system_notification": 0,
+ "send_to_all_assignees": 0,
+ "subject": "{% include \"tshenolo/templates/emails/grn_notification_subject.txt\" %}"
+}

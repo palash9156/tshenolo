@@ -1,0 +1,64 @@
+{#- Body of the remittance email. Shared by the "Tshenolo Remittance Advice" Notification and Email Template; uses only `doc`. -#}
+{%- from "tshenolo/templates/print/tshenolo_macros.html" import money -%}
+{%- set settings = tshenolo_settings() -%}
+{%- set company = tshenolo_company(doc.company) -%}
+{%- set currency = doc.paid_to_account_currency or doc.paid_from_account_currency -%}
+{#- Whole style attributes, so the cell styles stay inline for email clients and are defined once. -#}
+{%- set th = 'style="background:#0b4f6c;color:#ffffff;padding:6px 8px;text-align:left;font-size:12px;"' -%}
+{%- set th_num = 'style="background:#0b4f6c;color:#ffffff;padding:6px 8px;text-align:right;font-size:12px;"' -%}
+{%- set td = 'style="border-bottom:1px solid #e4e7eb;padding:6px 8px;font-size:13px;"' -%}
+{%- set td_num = 'style="border-bottom:1px solid #e4e7eb;padding:6px 8px;font-size:13px;text-align:right;"' -%}
+<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#1f2933;line-height:1.5;">
+	<p>{{ _("Dear {0},").format(doc.contact_person or doc.party_name or doc.party) }}</p>
+
+	<p>{{ _("I hope you are well.") }}</p>
+
+	<p>{{ _("Please find attached the formal Remittance Advice for a payment successfully processed into your bank account on {0}.").format(frappe.utils.format_date(doc.reference_date or doc.posting_date, "dd MMMM yyyy")) }}</p>
+
+	<ul>
+		<li><strong>{{ _("Payer Name") }}:</strong> {{ doc.company }}</li>
+		<li><strong>{{ _("Payment Ref Number") }}:</strong> {{ doc.reference_no or doc.name }}</li>
+		<li><strong>{{ _("Total Amount Paid") }}:</strong> {{ money(doc.paid_amount, doc.paid_from_account_currency) }}</li>
+	</ul>
+
+	<p style="font-weight:bold;margin-bottom:4px;">{{ _("Allocation Breakdown") }}:</p>
+	<p style="margin-top:0;">{{ _("This amount clears the following outstanding documents:") }}</p>
+	<table style="border-collapse:collapse;width:100%;margin-bottom:16px;">
+		<tr>
+			<th {{ th }}>{{ _("Document / Invoice Number") }}</th>
+			<th {{ th_num }}>{{ _("Original Amount") }}</th>
+			<th {{ th_num }}>{{ _("Amount Paid") }}</th>
+		</tr>
+		{%- for row in tshenolo_remittance_rows(doc) %}
+		<tr{% if row.allocated_amount < 0 %} style="color:#a61b1b;"{% endif %}>
+			<td {{ td }}>{{ row.label }}</td>
+			<td {{ td_num }}>{{ money(row.total_amount, currency) }}</td>
+			<td {{ td_num }}>{{ money(row.allocated_amount, currency) }}</td>
+		</tr>
+		{%- endfor %}
+		{%- if doc.unallocated_amount %}
+		<tr>
+			<td {{ td }}>{{ _("Unallocated (on account)") }}</td>
+			<td {{ td }}></td>
+			<td {{ td_num }}>{{ money(doc.unallocated_amount, currency) }}</td>
+		</tr>
+		{%- endif %}
+	</table>
+
+	<p>
+		<strong>{{ _("Important Note regarding EFT Clearances") }}:</strong><br>
+		{{ _("This payment was dispatched via {0}. Depending on your banking institution, funds may take up to 24 to 48 hours to reflect in your account unless processed via immediate clearance.").format(doc.bank or _("our bank")) }}
+	</p>
+
+	<p>{{ _("Please apply this payment to our account balance. If there are any allocation discrepancies, kindly notify our finance department immediately by replying to this email.") }}</p>
+	<p>{{ _("Thank you for your continued partnership.") }}</p>
+
+	<p>
+		{{ _("Kind regards,") }}<br>
+		<strong>{{ settings.remittance_signatory_name or "" }}</strong><br>
+		{{ settings.remittance_signatory_designation or "" }}<br>
+		{{ doc.company }}
+		{%- if company.phone_no %}<br>{{ company.phone_no }}{% endif %}
+		{%- if company.email %}<br>{{ company.email }}{% endif %}
+	</p>
+</div>

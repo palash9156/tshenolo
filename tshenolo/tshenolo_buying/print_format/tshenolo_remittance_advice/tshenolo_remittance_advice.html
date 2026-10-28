@@ -1,0 +1,84 @@
+{%- from "tshenolo/templates/print/tshenolo_macros.html" import money -%}
+{%- set settings = tshenolo_settings() -%}
+{%- set company = tshenolo_company(doc.company) -%}
+{%- set currency = doc.paid_to_account_currency or doc.paid_from_account_currency -%}
+{%- set rows = tshenolo_remittance_rows(doc) -%}
+{%- set ts_title = _("REMITTANCE ADVICE") -%}
+{%- set ts_meta = [
+	(_("Payment Ref Number"), doc.reference_no),
+	(_("Payment Date"), frappe.utils.format_date(doc.reference_date or doc.posting_date, "dd MMMM yyyy")),
+	(_("Payment Entry"), doc.name),
+] -%}
+<div class="ts-doc">
+	{% include "tshenolo/templates/print/tshenolo_header.html" %}
+
+	<div class="ts-blocks">
+		<div class="ts-block">
+			<div class="ts-block-title">{{ _("Payee") }}</div>
+			<table class="ts-fields">
+				<tr><th>{{ _("Supplier") }}</th><td>{{ doc.party_name or doc.party }}</td></tr>
+				<tr><th>{{ _("Contact Person") }}</th><td>{{ doc.contact_person or "" }}</td></tr>
+				<tr><th>{{ _("Email") }}</th><td>{{ doc.contact_email or "" }}</td></tr>
+			</table>
+		</div>
+		<div class="ts-block">
+			<div class="ts-block-title">{{ _("Payment Details") }}</div>
+			<table class="ts-fields">
+				<tr><th>{{ _("Payer Name") }}</th><td>{{ doc.company }}</td></tr>
+				<tr><th>{{ _("Paid Via") }}</th><td>{{ doc.bank or doc.mode_of_payment or "" }}</td></tr>
+				<tr><th>{{ _("Total Amount Paid") }}</th><td><strong>{{ money(doc.paid_amount, doc.paid_from_account_currency) }}</strong></td></tr>
+			</table>
+		</div>
+	</div>
+
+	<div class="ts-section-title">{{ _("Allocation Breakdown") }}</div>
+	<table class="ts-items">
+		<thead>
+			<tr>
+				<th>{{ _("Document / Invoice Number") }}</th>
+				<th class="num">{{ _("Original Amount") }}</th>
+				<th class="num">{{ _("Amount Paid") }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{%- for row in rows %}
+			<tr{% if row.allocated_amount < 0 %} class="ts-negative"{% endif %}>
+				<td>{{ row.label }}</td>
+				<td class="num">{{ money(row.total_amount, currency) }}</td>
+				<td class="num">{{ money(row.allocated_amount, currency) }}</td>
+			</tr>
+			{%- endfor %}
+			{%- if doc.unallocated_amount %}
+			<tr>
+				<td>{{ _("Unallocated (on account)") }}</td>
+				<td class="num"></td>
+				<td class="num">{{ money(doc.unallocated_amount, currency) }}</td>
+			</tr>
+			{%- endif %}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td>{{ _("Total") }}</td>
+				<td></td>
+				<td class="num">{{ money(rows | sum(attribute="allocated_amount") + (doc.unallocated_amount or 0), currency) }}</td>
+			</tr>
+		</tfoot>
+	</table>
+
+	<div class="ts-note">
+		<strong>{{ _("Important Note regarding EFT Clearances") }}:</strong>
+		{{ _("This payment was dispatched via {0}. Depending on your banking institution, funds may take up to 24 to 48 hours to reflect in your account unless processed via immediate clearance.").format(doc.bank or _("our bank")) }}
+	</div>
+	<p class="ts-muted">{{ _("Please apply this payment to our account balance. If there are any allocation discrepancies, kindly notify our finance department immediately.") }}</p>
+
+	<div class="ts-signatures">
+		<div>
+			<div class="ts-sign-line">
+				<strong>{{ settings.remittance_signatory_name or "" }}</strong><br>
+				{{ settings.remittance_signatory_designation or "" }}<br>
+				{{ doc.company }}
+			</div>
+		</div>
+		<div></div>
+	</div>
+</div>

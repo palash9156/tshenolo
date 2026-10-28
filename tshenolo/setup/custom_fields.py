@@ -1,4 +1,13 @@
 BUYING = {
+	"Company": [
+		{
+			"fieldname": "sahpra_license_no",
+			"fieldtype": "Data",
+			"label": "SAHPRA License No",
+			"insert_after": "tax_id",
+			"description": "Printed on Purchase Orders, GRNs and Remittance Advices.",
+		},
+	],
 	"Supplier": [
 		{
 			"fieldname": "supplier_code",
@@ -165,6 +174,14 @@ BUYING = {
 			"columns": 1,
 			"description": "Sample lines are procured at zero value.",
 		},
+		{
+			"fieldname": "nappi_code",
+			"fieldtype": "Data",
+			"label": "NAPPI Code",
+			"insert_after": "is_sample",
+			"fetch_from": "item_code.nappi_code",
+			"read_only": 1,
+		},
 	],
 	"Purchase Receipt": [
 		{
@@ -183,6 +200,22 @@ BUYING = {
 			"fieldtype": "Check",
 			"label": "Is Sample",
 			"insert_after": "item_name",
+		},
+		{
+			"fieldname": "nappi_code",
+			"fieldtype": "Data",
+			"label": "NAPPI Code",
+			"insert_after": "is_sample",
+			"fetch_from": "item_code.nappi_code",
+			"read_only": 1,
+		},
+		{
+			"fieldname": "rejection_reason",
+			"fieldtype": "Small Text",
+			"label": "Rejection Reason",
+			"insert_after": "rejected_qty",
+			"depends_on": "eval:doc.rejected_qty > 0",
+			"description": "Shown to the supplier on the Goods Received Note.",
 		},
 		{
 			"fieldname": "supplier_lot_no",

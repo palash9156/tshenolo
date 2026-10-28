@@ -1,0 +1,1 @@
+{{ _("Remittance Advice / Payment Notification: {0} – Ref: {1}").format(doc.company, doc.reference_no or doc.name) }}

@@ -210,10 +210,9 @@ override_doctype_dashboards = {
 # ----------
 
 # add methods and filters to jinja environment
-# jinja = {
-# 	"methods": "tshenolo.utils.jinja_methods",
-# 	"filters": "tshenolo.utils.jinja_filters"
-# }
+jinja = {
+	"methods": ["tshenolo.print_utils"],
+}
 
 # Installation
 # ------------
@@ -322,9 +321,11 @@ override_doctype_dashboards = {
 # Overriding Methods
 # ------------------------------
 #
-# override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "tshenolo.event.get_events"
-# }
+override_whitelisted_methods = {
+	"frappe.email.doctype.email_template.email_template.get_email_templates": (
+		"tshenolo.overrides.get_email_templates"
+	),
+}
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,

@@ -25,7 +25,17 @@
   "asset_section",
   "asset_eol_notification_months",
   "column_break_asset",
-  "asset_alert_role"
+  "asset_alert_role",
+  "supplier_communication_section",
+  "warehouse_email",
+  "accounts_email",
+  "column_break_supplier_communication",
+  "po_approver_name",
+  "po_approver_designation",
+  "remittance_signatory_name",
+  "remittance_signatory_designation",
+  "procurement_terms_section",
+  "procurement_terms"
  ],
  "fields": [
   {
@@ -154,12 +164,70 @@
    "label": "Asset Alert Role",
    "options": "Role",
    "default": "Accounts Manager"
+  },
+  {
+   "fieldname": "supplier_communication_section",
+   "fieldtype": "Section Break",
+   "label": "Supplier Communication"
+  },
+  {
+   "fieldname": "warehouse_email",
+   "fieldtype": "Data",
+   "options": "Email",
+   "label": "Warehouse Email",
+   "description": "Inbound contact on Purchase Orders and CC on GRN emails."
+  },
+  {
+   "fieldname": "accounts_email",
+   "fieldtype": "Data",
+   "options": "Email",
+   "label": "Accounts Email",
+   "description": "CC on GRN emails."
+  },
+  {
+   "fieldname": "column_break_supplier_communication",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "po_approver_name",
+   "fieldtype": "Data",
+   "label": "PO Approver Name",
+   "default": "Teboho Tsolo"
+  },
+  {
+   "fieldname": "po_approver_designation",
+   "fieldtype": "Data",
+   "label": "PO Approver Designation",
+   "default": "Warehouse & Logistics Manager"
+  },
+  {
+   "fieldname": "remittance_signatory_name",
+   "fieldtype": "Data",
+   "label": "Remittance Signatory Name",
+   "default": "Pamela Sing"
+  },
+  {
+   "fieldname": "remittance_signatory_designation",
+   "fieldtype": "Data",
+   "label": "Remittance Signatory Designation",
+   "default": "Commercial Director"
+  },
+  {
+   "fieldname": "procurement_terms_section",
+   "fieldtype": "Section Break",
+   "label": "Purchase Order Terms"
+  },
+  {
+   "fieldname": "procurement_terms",
+   "fieldtype": "Text Editor",
+   "label": "Procurement Terms & Compliance Conditions",
+   "default": "<ol><li><strong>Three-Way Matching Policy:</strong> Final supplier payment requires an exact reconciliation between this Purchase Order (PO), the warehouse Goods Received Note (GRN) and your 15% VAT Tax Invoice.</li><li><strong>SAHPRA Establishment Conformity:</strong> The vendor guarantees that all specified medical devices comply fully with the South African Health Products Regulatory Authority standards and maintain valid regulatory registration throughout fulfilment.</li><li><strong>NAPPI Code Integrity:</strong> All medical device consumables and line items must carry the correct National Pharmaceutical Product Interface (NAPPI) codes on all accompanying delivery documents.</li><li><strong>EFT Settlement Framework:</strong> Payment will be made via Electronic Funds Transfer within 30 days of successful reconciliation, subject to local interbank settlement times.</li><li><strong>Delivery Protocol:</strong> Items must be safely packaged and delivered strictly to the designated Aspen Business Park reception centre during standard operating hours.</li></ol>"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-10-15 09:30:00.000000",
+ "modified": "2026-10-28 10:00:00.000000",
  "modified_by": "Administrator",
  "module": "Tshenolo",
  "name": "Tshenolo Settings",

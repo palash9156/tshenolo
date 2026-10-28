@@ -1,0 +1,7 @@
+{%- macro money(value, currency) -%}
+{%- if value < 0 %}-{% endif %}{{ currency }} {{ frappe.utils.fmt_money(value | abs) }}
+{%- endmacro -%}
+
+{%- macro qty(value) -%}
+{{ "%g" | format(value or 0) }}
+{%- endmacro -%}
